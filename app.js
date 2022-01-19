@@ -2,6 +2,7 @@
 const express = require("express");
 // const logsController = require("./controllers/logsController");
 const cors = require("cors");
+const budgeter = require("./controllers/budgetController");
 
 // Configuration
 const app = express();
@@ -10,8 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.use("/logs", logsController);
+app.use("/transactions", budgeter);
 
+//Home
 app.get("/", (req, res) => {
   res.send(`Welcome to the Budgeting Server`);
 });
