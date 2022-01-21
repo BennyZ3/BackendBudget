@@ -32,11 +32,7 @@ budgeter.get("/:id", (request, response) => {
 budgeter.post("/", (request, response) => {
   console.log("Post request");
   transactionsArray.push(request.body);
-  response.status(201).json(
-    transactionsArray.sort((a, b) => {
-      return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
-    })
-  );
+  response.status(201).json(transactionsArray);
 });
 
 // Delete request
@@ -54,11 +50,7 @@ budgeter.put("/:id", (request, response) => {
   console.log(`Put request for id: ${id}`);
   if (transactionsArray[id]) {
     transactionsArray[id] = request.body;
-    response.status(200).json(
-      transactionsArray.sort((a, b) => {
-        return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
-      })
-    );
+    response.status(200).json(transactionsArray);
   } else {
     response.status(404).json({ error: "index not found" });
   }
