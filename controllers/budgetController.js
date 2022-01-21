@@ -4,14 +4,20 @@ const { response } = require("../app");
 const app = require("../app");
 
 //Files
-const transactionsArray = require("../models/transactions");
-
+const transactionsArray = require("../models/transactions").sort((a, b) => {
+  return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+});
+console.log(transactionsArray);
 const budgeter = express.Router();
 
 // Get requests
 budgeter.get("/", (request, response) => {
   console.log("Get Request");
-  response.json(transactionsArray);
+  response.json(
+    transactionsArray.sort((a, b) => {
+      return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+    })
+  );
 });
 
 budgeter.get("/:id", (request, response) => {
@@ -26,7 +32,11 @@ budgeter.get("/:id", (request, response) => {
 budgeter.post("/", (request, response) => {
   console.log("Post request");
   transactionsArray.push(request.body);
-  response.status(201).json(transactionsArray);
+  response.status(201).json(
+    transactionsArray.sort((a, b) => {
+      return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+    })
+  );
 });
 
 // Delete request
@@ -42,10 +52,13 @@ budgeter.delete("/:id", (request, response) => {
 budgeter.put("/:id", (request, response) => {
   let { id } = request.params;
   console.log(`Put request for id: ${id}`);
-  // if (logValidater(request.body)) {
   if (transactionsArray[id]) {
     transactionsArray[id] = request.body;
-    response.status(200).json(transactionsArray);
+    response.status(200).json(
+      transactionsArray.sort((a, b) => {
+        return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+      })
+    );
   } else {
     response.status(404).json({ error: "index not found" });
   }
