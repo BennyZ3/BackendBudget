@@ -46,7 +46,7 @@ module.exports = [
     source: "Coffee",
     amount: -4,
     item_name: "",
-    category: "restaurant",
+    category: "restaurants",
   },
   {
     date: "2021-04-05",
@@ -60,7 +60,7 @@ module.exports = [
     source: "Groceries",
     amount: -76,
     item_name: "",
-    category: "groceries",
+    category: "grocery",
   },
   {
     date: "2021-04-03",
